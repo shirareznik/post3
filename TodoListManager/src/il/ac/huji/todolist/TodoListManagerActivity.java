@@ -24,7 +24,7 @@ public class TodoListManagerActivity extends Activity {
       
         ListView listCourses = 
         		(ListView)findViewById(R.id.lstTodoItems);
-        adapter = new CourseDisplayAdapter(this, tasks);
+        adapter = new TodoAdapter(this, tasks);
         listCourses.setAdapter(adapter);
         
         /*
@@ -59,7 +59,11 @@ public class TodoListManagerActivity extends Activity {
     		adapter.add(taskNew.getText().toString());
     		break;
     	case R.id.menuItemDelete:
-    		tasks.remove(pos);
+    		try {
+				tasks.remove(pos);
+			} catch (IndexOutOfBoundsException e) {
+			} catch (UnsupportedOperationException e)
+			{}
     		adapter.notifyDataSetChanged();
     		break;
     	}
